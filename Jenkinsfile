@@ -17,8 +17,10 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t employee-management:{$BUILD_NUMBER} .'
-		sh 'docker push ajayreddy19/employee-management:${BUILD_NUMBER}'
+                sh """
+		docker build -t ajayreddy19/employee-management:$(BUILD_NUMBER} . 
+		docker push ajayreddy19/employee-management:$(BUILD_NUMBER}
+		"""
             }
         }
 
