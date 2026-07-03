@@ -19,6 +19,17 @@ pipeline {
             }
         }
 
+	stage('SonarQube Analysis') {
+   	     steps {
+        	withSonarQubeEnv('SonarQube') {
+            		sh '''
+            		./mvnw clean verify sonar:sonar \
+              		-Dsonar.projectKey=employee-management
+            		'''
+        		}
+    		}
+	}
+
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} .'
